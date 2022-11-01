@@ -53,14 +53,17 @@ public class Main {
 
       if (moveNum >= 1 && moveNum <= 4) {
         tailNum = processTails(moveNum, tailNum);
+        headNum = processHeads(moveNum, headNum);
 
-        // tailNum returns -1 if not enough for move
-        if (tailNum != -1) {
-          headNum = processHeads(moveNum, headNum);
+        // returns -1 if only one left and asking for 2
+        if (tailNum != -1 && headNum != -1) {
           userCount++;
         } else {
-          tailNum = 1;
-          continue;
+            if (headNum == -1)
+              headNum = 1;
+
+            if (tailNum == -1)
+              tailNum = 1;
         }
       }
 
@@ -88,9 +91,9 @@ public class Main {
       try {
         inputNum = Integer.parseInt(scannerObj.next());
       } catch (NumberFormatException e) {
-        System.out.println();
-        System.out.println("Invalid user input");
-        System.out.println();
+          System.out.println();
+          System.out.println("Invalid user input");
+          System.out.println();
       }
     }
     return inputNum;
@@ -105,9 +108,9 @@ public class Main {
       try {
         inputNum = Integer.parseInt(scannerObj.next());
       } catch (NumberFormatException e) {
-        System.out.println();
-        System.out.println("Invalid user input");
-        System.out.println();
+          System.out.println();
+          System.out.println("Invalid user input");
+          System.out.println();
       }
     }
     return inputNum;
@@ -123,10 +126,10 @@ public class Main {
     if (headNum >= 0) {
       return headNum;
     } else {
-      System.out.println();
-      System.out.println("Only one head left. Choose a different move.");
-      System.out.println();
-      return 1;
+        System.out.println();
+        System.out.println("Only one head left. Choose a different move.");
+        System.out.println();
+        return -1;
     }
   }
 
@@ -140,10 +143,10 @@ public class Main {
     if (tailsNum >= 0) {
       return tailsNum;
     } else {
-      System.out.println();
-      System.out.println("Only one tail left. Choose a different move!");
-      System.out.println();
-      return -1;
+        System.out.println();
+        System.out.println("Only one tail left. Choose a different move!");
+        System.out.println();
+        return -1;
     }
   }
 
@@ -162,13 +165,13 @@ public class Main {
       headCalc++;
     }
 
-    //now repeatedly do turn 3 on heads down to 0 or 1
+    // now repeatedly do turn 3 on heads down to 0 or 1
     while (headCalc >= 2) {
       totalCalc++;
       headCalc = headCalc - 2;
     }
 
-    //(0,1) is 6 turns left
+    // (0,1) is 6 turns left
     if (headCalc == 0 && tailCalc == 1)
       totalCalc += 6;
 
