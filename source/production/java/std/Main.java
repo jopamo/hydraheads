@@ -62,8 +62,10 @@ public class Main {
             if (headNum == -1)
               headNum = 1;
 
-            if (tailNum == -1)
+            if (tailNum == -1) {
               tailNum = 1;
+              headNum -= 1;
+            }
         }
       }
 
